@@ -1,0 +1,9 @@
+[submodule "ambari-node-view"]
+	path = ambari-node-view
+	url = https://github.com/thinkmassive/ambari-node-view.git
+[submodule "structor"]
+	path = structor
+	url = https://github.com/thinkmassive/structor.git
+[submodule "http-server"]
+	path = http-server
+	url = https://github.com/thinkmassive/http-server.git
