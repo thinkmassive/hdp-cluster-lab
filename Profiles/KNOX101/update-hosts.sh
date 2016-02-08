@@ -38,8 +38,8 @@ function AddHost {
       EXIT_CODE=1
     fi
   else
-    if [ `echo ${IpLine} | wc -l` ]; then
-      LineNum=`grep -n "\<${EscIP}\>\|\<${MYHOST}\>" ${HOSTS_FILE} | cut -f 1 -d : -`
+    if [[ ${IpLine} ]]; then
+      LineNum=`grep -n "\<${EscIP}\>" ${HOSTS_FILE} | cut -f 1 -d : -`
       echo -e "WARN:\t${HOSTS_FILE} contains another entry for ${MYIP} on line ${LineNum}"
     fi
     [ $NONROOT != "0" ] && echo -e "TODO:\tsudo sh -c 'echo \"${MYIP}  ${FQDN} ${MYHOST}\" >> ${HOSTS_FILE}'"
