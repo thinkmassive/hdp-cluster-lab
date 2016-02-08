@@ -1,0 +1,171 @@
+{
+ "configurations": [
+  {
+   "core-site": {
+    "properties": {
+     "fs.defaultFS": "hdfs://hdpcluster",
+     "ha.zookeeper.quorum": "%HOSTGROUP::host_group_2%:2181,%HOSTGROUP::host_group_3%:2181,%HOSTGROUP::host_group_4%:2181"
+    }
+   }
+  },
+  {
+   "hdfs-site": {
+    "properties": {
+     "dfs.client.failover.proxy.provider.hdpcluster": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider",
+     "dfs.ha.automatic-failover.enabled": "true",
+     "dfs.ha.fencing.methods": "shell(/bin/true)",
+     "dfs.ha.namenodes.hdpcluster": "nn1,nn2",
+     "dfs.namenode.http-address": "%HOSTGROUP::host_group_2%:50070",
+     "dfs.namenode.http-address.hdpcluster.nn1": "%HOSTGROUP::host_group_2%:50070",
+     "dfs.namenode.http-address.hdpcluster.nn2": "%HOSTGROUP::host_group_3%:50070",
+     "dfs.namenode.https-address": "%HOSTGROUP::host_group_2%:50470",
+     "dfs.namenode.https-address.hdpcluster.nn1": "%HOSTGROUP::host_group_2%:50470",
+     "dfs.namenode.https-address.hdpcluster.nn2": "%HOSTGROUP::host_group_3%:50470",
+     "dfs.namenode.rpc-address.hdpcluster.nn1": "%HOSTGROUP::host_group_2%:8020",
+     "dfs.namenode.rpc-address.hdpcluster.nn2": "%HOSTGROUP::host_group_3%:8020",
+     "dfs.namenode.shared.edits.dir": "qjournal://%HOSTGROUP::host_group_2%:8485;%HOSTGROUP::host_group_3%:8485;%HOSTGROUP::host_group_4%:8485/hdpcluster",
+     "dfs.nameservices": "hdpcluster"
+    }
+   }
+  }
+ ],
+ "host_groups": [
+  {
+   "name": "host_group_1",
+   "components": [
+    {
+     "name": "AMBARI_SERVER"
+    },
+    {
+     "name": "YARN_CLIENT"
+    },
+    {
+     "name": "TEZ_CLIENT"
+    },
+    {
+     "name": "MAPREDUCE2_CLIENT"
+    },
+    {
+     "name": "MYSQL_SERVER"
+    },
+    {
+     "name": "HIVE_CLIENT"
+    },
+    {
+     "name": "KNOX_GATEWAY"
+    },
+    {
+     "name": "HDFS_CLIENT"
+    }
+   ],
+   "cardinality": "1"
+  },
+  {
+   "name": "host_group_2",
+   "components": [
+    {
+     "name": "TEZ_CLIENT"
+    },
+    {
+     "name": "HIVE_CLIENT"
+    },
+    {
+     "name": "YARN_CLIENT"
+    },
+    {
+     "name": "HDFS_CLIENT"
+    },
+    {
+     "name": "ZOOKEEPER_SERVER"
+    },
+    {
+     "name": "WEBHCAT_SERVER"
+    },
+    {
+     "name": "HIVE_SERVER"
+    },
+    {
+     "name": "HIVE_METASTORE"
+    },
+    {
+     "name": "ZKFC"
+    },
+    {
+     "name": "JOURNALNODE"
+    },
+    {
+     "name": "NAMENODE"
+    }
+   ],
+   "cardinality": "1"
+  },
+  {
+   "name": "host_group_3",
+   "components": [
+    {
+     "name": "TEZ_CLIENT"
+    },
+    {
+     "name": "YARN_CLIENT"
+    },
+    {
+     "name": "HDFS_CLIENT"
+    },
+    {
+     "name": "JOURNALNODE"
+    },
+    {
+     "name": "HISTORYSERVER"
+    },
+    {
+     "name": "RESOURCEMANAGER"
+    },
+    {
+     "name": "APP_TIMELINE_SERVER"
+    },
+    {
+     "name": "ZOOKEEPER_SERVER"
+    },
+    {
+     "name": "ZKFC"
+    },
+    {
+     "name": "NAMENODE"
+    }
+   ],
+   "cardinality": "1"
+  },
+  {
+   "name": "host_group_4",
+   "components": [
+    {
+     "name": "TEZ_CLIENT"
+    },
+    {
+     "name": "YARN_CLIENT"
+    },
+    {
+     "name": "DATANODE"
+    },
+    {
+     "name": "HDFS_CLIENT"
+    },
+    {
+     "name": "JOURNALNODE"
+    },
+    {
+     "name": "NODEMANAGER"
+    },
+    {
+     "name": "ZOOKEEPER_SERVER"
+    }
+   ],
+   "cardinality": "1"
+  }
+ ],
+ "Blueprints": {
+  "stack_name": "HDP",
+  "stack_version": "2.3",
+  "blueprint_name": "hdpcluster"
+ }
+}
