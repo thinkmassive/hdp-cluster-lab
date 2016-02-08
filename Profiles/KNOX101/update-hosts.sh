@@ -48,10 +48,10 @@ function AddHost {
   $DEBUG && echo ''
 }
 
-AddHost mgmt 240.0.0.10
-AddHost master01 240.0.0.11
-AddHost master02 240.0.0.12
-AddHost worker01 240.0.0.13
+AddHost mgmt 240.0.10.10
+AddHost master01 240.0.10.11
+AddHost master02 240.0.10.12
+AddHost worker01 240.0.10.13
 
 echo ''
 exit ${EXIT_CODE}

@@ -7,9 +7,9 @@
   "client_mem": 200,
   "clients" : [ ],
   "nodes": [
-    { "hostname": "mgmt",  "ip": "240.0.10.10", "roles": [ "ambari-server", "proxy-server", "proxy-client", "kdc" ] },
-    { "hostname": "master01",  "ip": "240.0.10.11", "roles": [ "ambari-agent", "proxy-client" ] },
-    { "hostname": "master02",  "ip": "240.0.10.12", "roles": [ "ambari-agent", "proxy-client"] },
-    { "hostname": "worker01",  "ip": "240.0.10.13", "roles": [ "ambari-agent", "proxy-client" ] },
+    { "hostname": "mgmt",  "ip": "240.0.10.10", "roles": [ "ambari-server", "ambari-agent", "kdc" ] },
+    { "hostname": "master01",  "ip": "240.0.10.11", "roles": [ "ambari-agent" ] },
+    { "hostname": "master02",  "ip": "240.0.10.12", "roles": [ "ambari-agent" ] },
+    { "hostname": "worker01",  "ip": "240.0.10.13", "roles": [ "ambari-agent" ] }
   ]
 }

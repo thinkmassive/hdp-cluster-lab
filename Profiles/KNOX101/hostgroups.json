@@ -1,5 +1,5 @@
 {
- "blueprint": "hdpcluster",
+ "blueprint": "knox101",
  "default_password": "replace-with-strong-password",
  "configurations": [],
  "host_groups": [
@@ -31,7 +31,7 @@
    "name": "host_group_4",
    "hosts": [
     {
-     "fqdn": "worker00.example.com"
+     "fqdn": "worker01.example.com"
     }
    ]
   }
