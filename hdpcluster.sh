@@ -109,8 +109,11 @@ function Resume {
 }
 
 function Destroy {
+  read -r -p "CLUSTER WILL BE DESTROYED!  Type 'yes' to proceed, anything else to cancel: " input
+  [ $input != "yes" ] && echo "Exiting." && exit 0
+  
   cd "${HDPCLUSTER_HOME}/structor"
-  vagrant status | grep virtualbox | awk '{print $1}' | xargs vagrant destroy
+  vagrant status | grep virtualbox | awk '{print $1}' | xargs vagrant destroy -f
   cd "$rundir"
 }
 
