@@ -15,18 +15,19 @@ HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE:-"KNOX101"}
 ##
 
 function PrintHelp {
-  echo "Usage:"
+  echo "Usage (unavailable features marked by * ):"
   echo "hdpcluster profile [<name>] - List available profiles, and set named profile active if one is specified"
   echo "           dns              - Add hosts in current profile to /etc/hosts"
   echo "           deploy           - Deploy the active profile"
-  echo "           halt             - Shutdown hosts in the active profile"
-  echo "           suspend          - Suspend hosts in the active profile"
-  echo "           resume           - Resume hosts in the active profile"
-  echo "           destroy          - Destroy the active cluster"
+  echo "         * halt             - Shutdown hosts in the active profile"
+  echo "         * suspend          - Suspend hosts in the active profile"
+  echo "         * resume           - Resume hosts in the active profile"
+  echo "         * destroy          - Destroy the active cluster"
   echo "           status [<host>]  - List all hosts, or show status of specified host"
   echo "           ssh <host>       - ssh to the specified host"
   echo "           gui              - Graphical cluster design tool"
   echo "           help             - Print this help message"
+  echo ''
 }
 
 function SetProfile {
@@ -108,6 +109,11 @@ function Status {
 }
 
 function SSH {
+  echo ''
+  echo ''
+  echo 'To become root in the VM: sudo su -'
+  echo ''
+  echo ''
   cd ${HDPCLUSTER_HOME}/structor
   vagrant ssh $args
 }
