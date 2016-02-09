@@ -1,6 +1,26 @@
 {
  "configurations": [
   {
+    "kerberos-env": {
+      "properties_attributes" : { },
+      "properties" : {
+        "realm" : "EXAMPLE.COM",
+        "kdc_type" : "mit-kdc",
+        "kdc_host" : "mgmt.example.com",
+        "admin_server_host" : "mgmt.example.com"
+      }
+    }
+  },
+  {
+    "krb5-conf": {
+      "properties_attributes" : { },
+      "properties" : {
+        "domains" : "AMBARI.APACHE.ORG",
+        "manage_krb5_conf" : "true"
+      }
+    }
+  },
+  {
    "core-site": {
     "properties": {
      "fs.defaultFS": "hdfs://hdpcluster",
