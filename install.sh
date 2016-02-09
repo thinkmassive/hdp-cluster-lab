@@ -18,6 +18,7 @@ echo "Appending alias and ENV vars to ~/.bash_profile"
 echo -e "\n# hdpcluster utility" >> ~/.bash_profile
 echo "export HDPCLUSTER_HOME=${HDPCLUSTER_HOME}" >> ~/.bash_profile
 echo "alias hdpcluster='${HDPCLUSTER_HOME}/hdpcluster.sh'" >> ~/.bash_profile
+. ~/.bash_profile
 
 echo "Setup complete!"
 cd $rundir
