@@ -101,9 +101,10 @@ function Destroy {
   echo "TODO: vagrant destroy \$ALL"
 }
 
-function ListHosts {
+function Status {
+  args=$1
   cd ${HDPCLUSTER_HOME}/structor
-  vagrant status
+  vagrant status $args
 }
 
 function SSH {
@@ -173,7 +174,7 @@ case $command in
     Destroy
     ;;
   "status")
-    [ $args ] && Status $args || ListHosts
+    Status $args
     ;;
   "ssh")
     [ $args ] && SSH $args || echo "Usage: hdpcluster ssh <host>"
