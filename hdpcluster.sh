@@ -129,7 +129,7 @@ function SSH {
 }
 
 function LaunchGui {
-  ${HDPCLUSTER_HOME}/http-server/bin/http-server ambari-node-view -o
+  ${HDPCLUSTER_HOME}/http-server/bin/http-server ${HDPCLUSTER_HOME}/ambari-node-view -o
 }
 
 
