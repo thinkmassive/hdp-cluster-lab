@@ -52,14 +52,11 @@ function SetProfile {
   cp -a ${profile_home}/ambari.repo ${HDPCLUSTER_HOME}/structor/files/repos/ambari.repo \
     && echo "Set structor ambari.repo"
 
-  # Update DNS info
-  UpdateDns
-  
-  # Apply Blueprint - TODO: make non-fqdn specific
-  ApplyBlueprint mgmt.example.com "${profile_home}/blueprint.json" "${profile_home}/hostgroups.json"
-
   # SetProfile complete
+  echo ''
   echo "Active profile: ${HDPCLUSTER_PROFILE}"
+  echo ''
+  echo "Update /etc/hosts by executing: hdpcluster dns"
 }
 
 function ListProfiles {
@@ -77,6 +74,11 @@ function Deploy {
   cd ${HDPCLUSTER_HOME}/structor
   vagrant up
   cd $rundir
+
+  profile_home="${HDPCLUSTER_HOME}/Profiles/${HDPCLUSTER_PROFILE}"
+  # Apply Blueprint - TODO: make non-fqdn specific
+  ApplyBlueprint mgmt.example.com "${profile_home}/blueprint.json" "${profile_home}/hostgroups.json"
+
 }
 
 function Halt {
