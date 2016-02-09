@@ -1,15 +1,15 @@
 # hdpcluster
-A utility to provide rapid HDP cluster deployment for testing and training purposes. It's built on the shoulders of giants, including [structor](https://github.com/hortonworks/structor), [ambari-node-view](https://github.com/mr-jstraub/ambari-node-view), and [Apache Ambari](https://github.com/apache/ambari).
+A utility to provide rapid HDP cluster deployment for testing and training purposes. It stands on the shoulders of giants, including [structor](https://github.com/hortonworks/structor), [ambari-node-view](https://github.com/mr-jstraub/ambari-node-view), and [Apache Ambari](https://github.com/apache/ambari).
 
 ## Installation:
--  git clone https://github.com/thinkmassive/hdpcluster.git
--  ./hdpcluster/install.sh
+-  `git clone https://github.com/thinkmassive/hdpcluster.git`
+-  `./hdpcluster/install.sh`
 
 ## Notes
 
 **This project is under heavy development and is subject to backwards-incompatible changes until this message is removed.**
 
-The initial state of this project is essentially a shell script that wraps the underlying tools for ease of use. 
+The initial state of this project is essentially a shell script that wraps the underlying tools for ease of use. Improvements coming soon. Pull requests welcome.
 
 ## Operation:
 
