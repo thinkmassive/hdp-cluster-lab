@@ -19,10 +19,10 @@ function PrintHelp {
   echo "hdpcluster profile [<name>] - List available profiles, and set named profile active if one is specified"
   echo "           dns              - Add hosts in current profile to /etc/hosts"
   echo "           deploy           - Deploy the active profile"
-  echo "         * halt             - Shutdown hosts in the active profile"
-  echo "         * suspend          - Suspend hosts in the active profile"
+  echo "           halt             - Shutdown hosts in the active profile"
+  echo "           suspend          - Suspend hosts in the active profile"
   echo "         * resume           - Resume hosts in the active profile"
-  echo "         * destroy          - Destroy the active cluster"
+  echo "           destroy          - Destroy the active cluster"
   echo "           status [<host>]  - List all hosts, or show status of specified host"
   echo "           ssh <host>       - ssh to the specified host"
   echo "           gui              - Graphical cluster design tool"
@@ -82,30 +82,36 @@ function Deploy {
 
 }
 
+function Status {
+  args=$1
+  cd "${HDPCLUSTER_HOME}/structor"
+  vagrant status $args
+  cd "$rundir"
+}
+
 function Halt {
-  cd ${HDPCLUSTER_HOME}/structor
-  echo "TODO: vagrant halt \$ALL"
+  cd "${HDPCLUSTER_HOME}/structor"
+  vagrant status | grep virtualbox | grep running | awk '{print $1}' | xargs vagrant halt
+  cd "$rundir"
 }
 
 function Suspend {
-  cd ${HDPCLUSTER_HOME}/structor
-  echo "TODO: vagrant suspend \$ALL"
+  cd "${HDPCLUSTER_HOME}/structor"
+  vagrant status | grep virtualbox | grep running | awk '{print $1}' | xargs vagrant suspend
+  cd "$rundir"
 }
 
 function Resume {
-  cd ${HDPCLUSTER_HOME}/structor
-  echo "TODO: vagrant resume \$ALL"
+  cd "${HDPCLUSTER_HOME}/structor"
+  vagrant status | grep virtualbox | grep saved | awk '{print $1}'| xargs vagrant resume
+  vagrant status | grep virtualbox | grep running | awk '{print $1}'| xargs vagrant reload
+  cd "$rundir"
 }
 
 function Destroy {
-  cd ${HDPCLUSTER_HOME}/structor
-  echo "TODO: vagrant destroy \$ALL"
-}
-
-function Status {
-  args=$1
-  cd ${HDPCLUSTER_HOME}/structor
-  vagrant status $args
+  cd "${HDPCLUSTER_HOME}/structor"
+  vagrant status | grep virtualbox | awk '{print $1}' | xargs vagrant destroy
+  cd "$rundir"
 }
 
 function SSH {
@@ -116,6 +122,7 @@ function SSH {
   echo ''
   cd ${HDPCLUSTER_HOME}/structor
   vagrant ssh $args
+  cd "$rundir"
 }
 
 function LaunchGui {
