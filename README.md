@@ -5,6 +5,11 @@ A utility to provide rapid HDP cluster deployment for testing and training purpo
 -  `git clone https://github.com/thinkmassive/hdpcluster.git`
 -  `./hdpcluster/install.sh`
 
+### Quick Start:
+After installation, execute the following commands to deploy a secured 4-node cluster with NN HA, Hive, and Knox:
+- `hdpcluster profile KNOX101`
+- `hdpcluster deploy`
+
 ## Notes
 
 **This project is under heavy development and is subject to backwards-incompatible changes until this message is removed.**
