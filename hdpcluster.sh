@@ -76,9 +76,8 @@ function Deploy {
   vagrant up
   cd $rundir
 
-  profile_home="${HDPCLUSTER_HOME}/Profiles/${HDPCLUSTER_PROFILE}"
   # Apply Blueprint - TODO: make non-fqdn specific
-  ApplyBlueprint mgmt.example.com "${profile_home}/blueprint.json" "${profile_home}/hostgroups.json"
+  ApplyBlueprint mgmt.example.com 
 
 }
 
@@ -134,10 +133,10 @@ function LaunchGui {
 
 
 function ApplyBlueprint {
-  cd $ProfileDir
   AmbariHost=$1
-  BlueprintFile=$2
-  HostgroupsFile=$3
+  profile_home="${HDPCLUSTER_HOME}/Profiles/${HDPCLUSTER_PROFILE}"
+  BlueprintFile=${profile_home}/blueprint.json
+  HostgroupsFile=${profile_home}/hostgroups.json
   [ ! "${AmbariHost}" ] && echo "No Ambari host supplied, exiting" && exit 1
   [ ! -e "${BlueprintFile}" ] && echo "Blueprint file not found, exiting" && exit 1
   [ ! -e "${HostgroupsFile}" ] && echo "Hostgroups file not found, exiting" && exit 1
@@ -176,6 +175,9 @@ case $command in
     ;;
   "deploy")
     Deploy
+    ;;
+  "blueprint")
+    ApplyBlueprint mgmt.example.com 
     ;;
   "halt")
     Halt

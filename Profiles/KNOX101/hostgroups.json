@@ -1,6 +1,6 @@
 {
  "blueprint": "knox101",
- "default_password": "replace-with-strong-password",
+ "default_password": "hadoop",
  "configurations": [],
  "host_groups": [
   {
@@ -35,5 +35,19 @@
     }
    ]
   }
- ]
+ ],
+ "credentials": [
+  {
+   "alias": "kdc.admin.credential",
+   "principal": "admin/admin",
+   "key": "admin",
+   "type": "TEMPORARY"
+  }
+ ],
+ "security": {
+  "type": "KERBEROS"
+ },
+ "Clusters": {
+  "cluster_name": "hdpcluster"
+ }
 }
