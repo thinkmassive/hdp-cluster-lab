@@ -5,6 +5,12 @@ A utility to provide rapid HDP cluster deployment for testing and training purpo
 -  `git clone https://github.com/thinkmassive/hdpcluster.git`
 -  `./hdpcluster/install.sh`
 
+### Quick Start:
+After installation, execute the following commands to deploy a secured 4-node cluster with NN HA, Hive, and Knox:
+- `hdpcluster profile KNOX101`
+- `hdpcluster deploy`
+- `ssh root@mgmt.example.com` (password: hadoop)
+
 ## Notes
 
 **This project is under heavy development and is subject to backwards-incompatible changes until this message is removed.**
@@ -18,9 +24,6 @@ The initial state of this project is essentially a shell script that wraps the u
 |`hdpcluster profile [<name>]`|List available profiles, and set named profile active if one is specified|
 |`hdpcluster dns`|Add hosts in current profile to /etc/hosts|
 |`hdpcluster deploy`|Deploy hosts in the active profile|
-|`hdpcluster halt`|Shutdown hosts in the active profile|
-|`hdpcluster suspend`|Suspend hosts in the active profile|
-|`hdpcluster resume`|Resume hosts in the active profile|
 |`hdpcluster destroy`|Destroy the active cluster|
 |`hdpcluster status [<host>]`|List all hosts, or show status of specified host|
 |`hdpcluster ssh <host>`|ssh to the specified host|
