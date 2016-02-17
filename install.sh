@@ -6,6 +6,9 @@ export HDPCLUSTER_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 [[ `VBoxManage -version | grep 'command not found'` ]] && echo "Could not find VirtualBox, exiting." && exit 1
 [[ `vagrant version | grep 'command not found'` ]] && echo "Could not find Vagrant, exiting." && exit 1
 
+echo "Adding Vagrant box puppetlabs/centos7-puppet"
+vagrant box add puppetlabs/centos-7.2-64-puppet
+
 echo "Installing vagrant-cachier plugin"
 vagrant plugin install vagrant-cachier
 

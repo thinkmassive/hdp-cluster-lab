@@ -8,7 +8,7 @@ command=$1
 args=$2
 rundir=`pwd`
 HDPCLUSTER_HOME=${HDPCLUSTER_HOME:-"~/hdpcluster"}
-HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE:-"KNOX101"}
+HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE:-"knox-101"}
 
 ##
 ## FUNCTIONS
@@ -73,7 +73,7 @@ function UpdateDns {
 
 function Deploy {
   cd ${HDPCLUSTER_HOME}/structor
-  vagrant up
+  vagrant up --provider virtualbox
   cd $rundir
 
   # Apply Blueprint - TODO: make non-fqdn specific

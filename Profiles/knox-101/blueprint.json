@@ -1,26 +1,6 @@
 {
  "configurations": [
   {
-    "kerberos-env": {
-      "properties_attributes" : { },
-      "properties" : {
-        "realm" : "EXAMPLE.COM",
-        "kdc_type" : "mit-kdc",
-        "kdc_host" : "mgmt.example.com",
-        "admin_server_host" : "mgmt.example.com"
-      }
-    }
-  },
-  {
-    "krb5-conf": {
-      "properties_attributes" : { },
-      "properties" : {
-        "domains" : "EXAMPLE.COM",
-        "manage_krb5_conf" : "true"
-      }
-    }
-  },
-  {
    "core-site": {
     "properties": {
      "fs.defaultFS": "hdfs://hdpcluster",
@@ -70,9 +50,6 @@
     },
     {
      "name": "HIVE_CLIENT"
-    },
-    {
-     "name": "KNOX_GATEWAY"
     },
     {
      "name": "HDFS_CLIENT"
@@ -186,6 +163,6 @@
  "Blueprints": {
   "stack_name": "HDP",
   "stack_version": "2.3",
-  "blueprint_name": "knox101"
+  "blueprint_name": "hdpcluster"
  }
 }

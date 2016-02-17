@@ -1,0 +1,39 @@
+{
+ "blueprint": "hdpcluster",
+ "default_password": "hadoop",
+ "configurations": [],
+ "host_groups": [
+  {
+   "name": "host_group_1",
+   "hosts": [
+    {
+     "fqdn": "mgmt.example.com"
+    }
+   ]
+  },
+  {
+   "name": "host_group_2",
+   "hosts": [
+    {
+     "fqdn": "master01.example.com"
+    }
+   ]
+  },
+  {
+   "name": "host_group_3",
+   "hosts": [
+    {
+     "fqdn": "master02.example.com"
+    }
+   ]
+  },
+  {
+   "name": "host_group_4",
+   "hosts": [
+    {
+     "fqdn": "worker01.example.com"
+    }
+   ]
+  }
+ ]
+}
