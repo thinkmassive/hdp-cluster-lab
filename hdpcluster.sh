@@ -7,8 +7,9 @@
 command=$1
 args=$2
 rundir=`pwd`
+source ${HDPCLUSTER_HOME}/.config 2>/dev/null
 HDPCLUSTER_HOME=${HDPCLUSTER_HOME:-"~/hdpcluster"}
-HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE:-"knox-101"}
+HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE:-"4node-nonsecure"}
 
 ##
 ## FUNCTIONS
@@ -27,41 +28,60 @@ function PrintHelp {
   echo "           ssh <host>       - ssh to the specified host"
   echo "           gui              - Graphical cluster design tool"
   echo "           help             - Print this help message"
-  echo ''
+  ListActiveProfile
 }
 
 function SetProfile {
   [ ! $args ] && echo "No profile specified, exiting" && exit 1
 
   profile_home="${HDPCLUSTER_HOME}/Profiles/${args}"
+  profile_error=0
 
   # Verify profile contains required files
-  [ ! -f "${profile_home}/structor.json" ] && echo "Profile missing structor.json, exiting" && exit 1
-  [ ! -f "${profile_home}/blueprint.json" ] && echo "Profile missing blueprint.json, exiting" && exit 1
-  [ ! -f "${profile_home}/hostgroups.json" ] && echo "Profile missing hostgroups.json, exiting" && exit 1
-  [ ! -f "${profile_home}/hdp.repo" ] && echo "Profile missing hdp.repo, exiting" && exit 1
-  [ ! -f "${profile_home}/ambari.repo" ] && echo "Profile missing ambari.repo, exiting" && exit 1
+  [ ! -d "${profile_home}" ] && echo "Profile directory ${profile_home} does not exist" && (( profile_error++ ))
+  [ ! -f "${profile_home}/structor.json" ] && echo "Profile missing structor.json" && (( profile_error++ ))
+  [ ! -f "${profile_home}/blueprint.json" ] && echo "Profile missing blueprint.json" && (( profile_error++ ))
+  [ ! -f "${profile_home}/hostgroups.json" ] && echo "Profile missing hostgroups.json" && (( profile_error++ ))
+  [ ! -f "${profile_home}/hdp.repo" ] && echo "Profile missing hdp.repo" && (( profile_error++ ))
+  [ ! -f "${profile_home}/ambari.repo" ] && echo "Profile missing ambari.repo" && (( profile_error++ ))
+  [ $profile_error -gt 0 ] && echo "Error setting new profile, exiting." && ListActiveProfile && exit 1
+
+  # Set new active profile
   export HDPCLUSTER_PROFILE=$args
 
   # Copy files into place
-  rm -f ${HDPCLUSTER_HOME}/structor/current.profile \
-    && echo "Removed old structor/current.profile"
-  ln -s ${profile_home}/structor.json ${HDPCLUSTER_HOME}/structor/current.profile \
-    && echo "Set structor/current.profile -> ${HDPCLUSTER_PROFILE}/structor.json"
-  cp -a ${profile_home}/hdp.repo ${HDPCLUSTER_HOME}/structor/files/repos/hdp.repo \
-    && echo "Set structor hdp.repo"
-  cp -a ${profile_home}/ambari.repo ${HDPCLUSTER_HOME}/structor/files/repos/ambari.repo \
-    && echo "Set structor ambari.repo"
+  rm -f ${HDPCLUSTER_HOME}/structor/current.profile # && echo "Removed old structor/current.profile"
+  ln -s ${profile_home}/structor.json ${HDPCLUSTER_HOME}/structor/current.profile # && echo "Set structor/current.profile -> ${HDPCLUSTER_PROFILE}/structor.json"
+  cp -a ${profile_home}/hdp.repo ${HDPCLUSTER_HOME}/structor/files/repos/hdp.repo # && echo "Set structor hdp.repo"
+  cp -a ${profile_home}/ambari.repo ${HDPCLUSTER_HOME}/structor/files/repos/ambari.repo # && echo "Set structor ambari.repo"
+
+  # Update .config file
+  conf_file=${HDPCLUSTER_HOME}/.config
+  if [ -f "${conf_file}" ]; then
+    if [ `grep 'HDPCLUSTER_PROFILE' $conf_file | wc -l` -gt 0 ]; then
+      text_replace="s/HDPCLUSTER_PROFILE=.*/HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE}/g"
+      sed -e "${text_replace}" -i .bak "${conf_file}"
+    else
+      echo "HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE}" >> ${conf_file}
+    fi
+  fi
 
   # SetProfile complete
+  ListActiveProfile
+  echo "Update /etc/hosts by executing: hdpcluster dns"
+
+}
+
+function ListActiveProfile {
   echo ''
   echo "Active profile: ${HDPCLUSTER_PROFILE}"
   echo ''
-  echo "Update /etc/hosts by executing: hdpcluster dns"
 }
 
 function ListProfiles {
+  echo 'Available profiles:'
   ls -1 ${HDPCLUSTER_HOME}/Profiles
+  ListActiveProfile
 }
 
 function UpdateDns {
