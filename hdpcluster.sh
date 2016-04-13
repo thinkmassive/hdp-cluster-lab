@@ -10,6 +10,7 @@ rundir=`pwd`
 source ${HDPCLUSTER_HOME}/.config 2>/dev/null
 HDPCLUSTER_HOME=${HDPCLUSTER_HOME:-"~/hdpcluster"}
 HDPCLUSTER_PROFILE=${HDPCLUSTER_PROFILE:-"4node-nonsecure"}
+echo "HDPCLUSTER_PROFILE: ${HDPCLUSTER_PROFILE}"
 
 ##
 ## FUNCTIONS
@@ -92,6 +93,11 @@ function UpdateDns {
 }
 
 function Deploy {
+  # Re-apply active profile to distribute files
+  args=${HDPCLUSTER_PROFILE}
+  SetProfile
+
+  # Set up Vagrant VMs
   cd ${HDPCLUSTER_HOME}/structor
   vagrant up --provider virtualbox
   cd $rundir
@@ -128,8 +134,8 @@ function Resume {
 }
 
 function Destroy {
-  read -r -p "CLUSTER WILL BE DESTROYED!  Type 'yes' to proceed, anything else to cancel: " input
-  [ $input != "yes" ] && echo "Exiting." && exit 0
+#  read -r -p "CLUSTER WILL BE DESTROYED!  Type 'yes' to proceed, anything else to cancel: " input
+#  [ $input != "yes" ] && echo "Exiting." && exit 0
   
   cd "${HDPCLUSTER_HOME}/structor"
   vagrant status | grep virtualbox | awk '{print $1}' | xargs vagrant destroy -f

@@ -14,16 +14,25 @@
      "name": "ZOOKEEPER_CLIENT"
     },
     {
-     "name": "MAPREDUCE2_CLIENT"
+     "name": "TEZ_CLIENT"
     },
     {
      "name": "YARN_CLIENT"
     },
     {
-     "name": "TEZ_CLIENT"
+     "name": "NODEMANAGER"
+    },
+    {
+     "name": "DATANODE"
+    },
+    {
+     "name": "MAPREDUCE2_CLIENT"
     },
     {
      "name": "HDFS_CLIENT"
+    },
+    {
+     "name": "SECONDARY_NAMENODE"
     }
    ],
    "cardinality": "1"
@@ -32,10 +41,25 @@
    "name": "host_group_2",
    "components": [
     {
+     "name": "HISTORYSERVER"
+    },
+    {
      "name": "ZOOKEEPER_SERVER"
     },
     {
-     "name": "HISTORYSERVER"
+     "name": "YARN_CLIENT"
+    },
+    {
+     "name": "APP_TIMELINE_SERVER"
+    },
+    {
+     "name": "TEZ_CLIENT"
+    },
+    {
+     "name": "MAPREDUCE2_CLIENT"
+    },
+    {
+     "name": "HDFS_CLIENT"
     },
     {
      "name": "NAMENODE"
@@ -47,28 +71,22 @@
    "name": "host_group_3",
    "components": [
     {
-     "name": "ZOOKEEPER_SERVER"
-    },
-    {
      "name": "RESOURCEMANAGER"
     },
     {
-     "name": "APP_TIMELINE_SERVER"
+     "name": "ZOOKEEPER_SERVER"
     },
     {
-     "name": "SECONDARY_NAMENODE"
-    }
-   ],
-   "cardinality": "1"
-  },
-  {
-   "name": "host_group_4",
-   "components": [
-    {
-     "name": "DATANODE"
+     "name": "MAPREDUCE2_CLIENT"
     },
     {
-     "name": "NODEMANAGER"
+     "name": "YARN_CLIENT"
+    },
+    {
+     "name": "TEZ_CLIENT"
+    },
+    {
+     "name": "HDFS_CLIENT"
     }
    ],
    "cardinality": "1"

@@ -1,2 +1,4 @@
 .config
 .config.bak
+*.box
+test/logs/*
